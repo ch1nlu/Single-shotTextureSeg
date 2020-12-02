@@ -190,7 +190,26 @@ def decoding(corr, conv1_1, conv2_1, conv3_1, conv4_1, conv5_1):
     return prediction
 
 
+
 keras.backend.clear_session()
-model = new_model()
-model.summary()
-# plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True)
+strategy = tf.distribute.MirroredStrategy()
+print('Number of devices:{}'.format(strategy.num_replicas_in_sync))
+
+with strategy.scope():
+    model = new_model()
+
+    model.summary()
+    # plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True)
+    optimizer = Adam(lr=0.00005)  # Learning rate = 0.00005
+    model.compile(loss='binary_crossentropy', optimizer=optimizer, run_eagerly=True)
+
+callbacks = [
+    keras.callbacks.ModelCheckpoint("result.h5", save_best_only=True)
+]
+gt = np.load('D:\projects\OTS_reconstruct\\test_data\\test_ground_truth.npy')
+gt = gt[np.newaxis, :]
+query = np.load('D:\projects\OTS_reconstruct\\test_data\\test_query.npy')
+query = query[np.newaxis, :]
+ref = np.load('D:\projects\OTS_reconstruct\\test_data\\test_ref.npy')
+ref = ref[np.newaxis, :]
+history = model.fit(x=[query, ref], y=gt, batch_size=1, epochs=3, callbacks=callbacks)
