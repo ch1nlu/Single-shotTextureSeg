@@ -8,4 +8,6 @@ In the 'model' folder, you will find the OSTS scripts that I wrote from scratch.
 
 In the 'results' folder, you can find the visualization of our recent results and get a sense of what we are working on.
 
-Primary references: [One-shot Texture Segmentation](https://arxiv.org/abs/1807.02654);[One-Shot Texture Retrieval with Global Context Metric](https://arxiv.org/abs/1905.06656)
+Primary references: 
+[One-shot Texture Segmentation](https://arxiv.org/abs/1807.02654) 
+[One-Shot Texture Retrieval with Global Context Metric](https://arxiv.org/abs/1905.06656)
