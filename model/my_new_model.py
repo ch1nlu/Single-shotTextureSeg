@@ -207,7 +207,8 @@ callbacks = [
     keras.callbacks.ModelCheckpoint("result.h5", save_best_only=True)
 ]
 gt = np.load('D:\projects\OTS_reconstruct\\test_data\\test_ground_truth.npy')
-gt = gt[np.newaxis, :]
+# gt = gt[np.newaxis, :]
+gt = np.expand_dims(gt, axis=-1)
 query = np.load('D:\projects\OTS_reconstruct\\test_data\\test_query.npy')
 query = query[np.newaxis, :]
 ref = np.load('D:\projects\OTS_reconstruct\\test_data\\test_ref.npy')
