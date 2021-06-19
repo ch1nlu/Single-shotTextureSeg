@@ -1,4 +1,4 @@
-# One-shotTextureSeg
+# SingleshotTextureSeg
 
 ## Project objective
 
